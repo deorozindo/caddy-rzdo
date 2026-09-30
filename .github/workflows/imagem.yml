@@ -1,0 +1,29 @@
+name: imagem
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/deorozindo/caddy-rzdo:2.10.0-rl0.1.0
+          labels: org.opencontainers.image.source=https://github.com/deorozindo/caddy-rzdo
+      - name: digest
+        run: echo "digest=${{ steps.push.outputs.digest }}" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: confere o módulo
+        run: docker run --rm ghcr.io/deorozindo/caddy-rzdo:2.10.0-rl0.1.0 caddy list-modules | grep -x 'http.handlers.rate_limit'
