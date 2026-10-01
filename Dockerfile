@@ -1,4 +1,4 @@
-FROM caddy:2.10.0-builder@sha256:fe8d0d6cdbfd382197c4d715ffd5b41210165e2f64a81ce546ae63eeef35873a AS builder
-RUN xcaddy build v2.10.0 --with github.com/mholt/caddy-ratelimit@v0.1.0
-FROM caddy:2.10.0@sha256:133b5eb7ef9d42e34756ba206b06d84f4e3eb308044e268e182c2747083f09de
+FROM caddy:2.11.4-builder@sha256:369218c81ca6d6af249981221b3a5c764d886dd5b058f51d144066de13f2418d AS builder
+RUN xcaddy build v2.11.4 --with github.com/mholt/caddy-ratelimit@v0.1.0
+FROM caddy:2.11.4@sha256:0c994536bddb66445885237f1a5dcc1916bccea922661c76b4e9fc24061f9b52
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy

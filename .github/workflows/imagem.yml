@@ -21,9 +21,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/deorozindo/caddy-rzdo:2.10.0-rl0.1.0
+          tags: ghcr.io/deorozindo/caddy-rzdo:2.11.4-rl0.1.0
           labels: org.opencontainers.image.source=https://github.com/deorozindo/caddy-rzdo
       - name: digest
         run: echo "digest=${{ steps.push.outputs.digest }}" | tee -a "$GITHUB_STEP_SUMMARY"
       - name: confere o módulo
-        run: docker run --rm ghcr.io/deorozindo/caddy-rzdo:2.10.0-rl0.1.0 caddy list-modules | grep -x 'http.handlers.rate_limit'
+        run: docker run --rm ghcr.io/deorozindo/caddy-rzdo:2.11.4-rl0.1.0 caddy list-modules | grep -x 'http.handlers.rate_limit'
