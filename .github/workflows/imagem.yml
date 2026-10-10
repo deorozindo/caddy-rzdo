@@ -26,4 +26,4 @@ jobs:
       - name: digest
         run: echo "digest=${{ steps.push.outputs.digest }}" | tee -a "$GITHUB_STEP_SUMMARY"
       - name: confere o módulo
-        run: docker run --rm ghcr.io/deorozindo/caddy-rzdo:2.11.4-rl0.1.0-hst caddy list-modules > modulos && grep -x 'http.handlers.rate_limit' modulos && grep -x 'dns.providers.cloudflare' modulos && grep -x 'dns.providers.lego_deprecated' modulos
+        run: docker run --rm ghcr.io/deorozindo/caddy-rzdo:2.11.4-rl0.1.0-hst caddy list-modules > modulos && grep -x 'http.handlers.rate_limit' modulos && grep -x 'dns.providers.cloudflare' modulos && grep -x 'dns.providers.hostinger' modulos
